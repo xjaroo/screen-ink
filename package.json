@@ -1,0 +1,26 @@
+{
+  "name": "screen-ink",
+  "version": "0.0.1",
+  "description": "drawing on the screen by electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "startWithTransparentOption": "electron --enable-transparent-visuals .",
+    "startWithAllOptions": "electron --enable-transparent-visuals --disable-gpu .",
+    "build": "electron-builder -mwl",
+    "build-mac": "electron-builder --mac",
+    "build-win": "electron-builder --win",
+    "build-linux": "electron-builder --linux"
+  },
+  "keywords": [
+    "Electron",
+    "transparent",
+    "tutorial",
+    "transparency"
+  ],
+  "author": "xjaroo",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.0.5"
+  }
+}
