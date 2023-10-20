@@ -2,7 +2,7 @@
   * {
     margin: 0;
     padding: 0;
-    cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✍️</text></svg>") 5 25,auto;
+
   }
   canvas {
     width: 100vw;
@@ -35,7 +35,22 @@
   const ctx = canvas.getContext("2d");
   let coord = { x: 0, y: 0 };
 
-  let defaultPenColor ='#c4144d';
+  let defaultPenColor ='#FF0000';
+
+  function updateCursorStyle() {
+
+      if(defaultPenColor === '#FF0000'){
+          document.body.style.cursor = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='font-size:24px;'><text y='50%'>🔴</text></svg>") 5 25, auto`;
+       }else if (defaultPenColor === '#0000FF'){
+          document.body.style.cursor = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='font-size:24px;'><text y='50%'>🔵</text></svg>") 5 25, auto`;
+      }else if (defaultPenColor === '#00FF00'){
+          document.body.style.cursor = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='font-size:24px;'><text y='50%'>🟢</text></svg>") 5 25, auto`;
+      }
+
+
+  }
+
+  updateCursorStyle(); // Call it initially
 
   document.addEventListener("mousedown", start);
   document.addEventListener("mouseup", stop);
@@ -52,39 +67,34 @@
   resize();
 
   function keypress(key) {
-      // const remote = require('@electron/remote');
-      // const currentWindow = remote.getCurrentWindow();
-       console.log(key.code);
-      if (key.code === "KeyH") {
-          const createdDiv = document.getElementById("createdDiv");
-          createdDiv.style.display = createdDiv.style.display === "block" ? "none" : "block";
-      }
+      switch (key.code) {
+          case "KeyH":
+              const createdDiv = document.getElementById("createdDiv");
+              createdDiv.style.display = createdDiv.style.display === "block" ? "none" : "block";
+              break;
 
-      if(key.code === 'Digit1'){
-          // currentWindow.maximize()
-          defaultPenColor='#FF0000';
-          document.addEventListener("mousemove", draw);
-          document.removeEventListener("mousemove", draw);
-      }
+          case "Digit1":
+              defaultPenColor = '#FF0000';
+              break;
 
-      if(key.code === 'Digit2'){
-          // currentWindow.maximize()
-          defaultPenColor='#0000FF';
-          document.addEventListener("mousemove", draw);
-          document.removeEventListener("mousemove", draw);
-      }
+          case "Digit2":
+              defaultPenColor = '#0000FF';
+              break;
 
-      if(key.code === 'Digit3'){
-          // currentWindow.maximize()
-          defaultPenColor='#00FF00';
-          document.addEventListener("mousemove", draw);
-          document.removeEventListener("mousemove", draw);
-      }
-      if(key.code === 'KeyC'){
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
+          case "Digit3":
+              defaultPenColor = '#00FF00';
+              break;
 
+          case "KeyC":
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              break;
 
+          // Add more cases as needed
+
+          default:
+              break;
+      }
+      updateCursorStyle();
   }
 
   function resize() {
