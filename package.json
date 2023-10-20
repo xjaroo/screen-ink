@@ -21,6 +21,10 @@
   "author": "xjaroo",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^4.0.5"
+    "electron": "^27.0.1"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.12",
+    "electron-localshortcut": "^3.2.1"
   }
 }

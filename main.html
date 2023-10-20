@@ -11,32 +11,80 @@
 
 </style>
 <canvas id="canvas"></canvas>
+<div id="createdDiv" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; width: 500px; height: 500px;">
+    <div style="text-align: center;">
+        <h2>How to use?</h2>
+        <br>   <br>
+        <div style="text-align: left; padding-left: 10px">
+            <ul>
+                <li>Press Number 1 - Red color pen</li>
+                <li>Press Number 2 - Red color Blue</li>
+                <li>Press Number 3 - Red color Green</li>
+                <li>Press C - Clear Screen</li>
+                <li>Press H - Show help window</li>
+                <li>Press Command Or Control + X - Hide/Show your drawing!</li>
+            </ul>
+        <br>
+        <p>If you have any question, please contact Min :)</p>
+        </div>
+    </div>
+</div>
 <script>
-
-
 
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   let coord = { x: 0, y: 0 };
 
+  let defaultPenColor ='#c4144d';
+
   document.addEventListener("mousedown", start);
   document.addEventListener("mouseup", stop);
-  window.addEventListener("resize", resize);
-  window.addEventListener("keypress", keypress);
+  document.addEventListener("resize", resize);
+  document.addEventListener("keypress", keypress);
+
+  document.body.addEventListener("click", (event) => {
+      const createdDiv = document.getElementById("createdDiv");
+      if (!createdDiv.contains(event.target)) {
+          createdDiv.style.display = "none";
+      }
+  });
 
   resize();
 
   function keypress(key) {
-
-      if(key.code === 'KeyQ'){
-          const remote = require('electron').remote
-          let w = remote.getCurrentWindow()
-          w.close()
+      // const remote = require('@electron/remote');
+      // const currentWindow = remote.getCurrentWindow();
+       console.log(key.code);
+      if (key.code === "KeyH") {
+          const createdDiv = document.getElementById("createdDiv");
+          createdDiv.style.display = createdDiv.style.display === "block" ? "none" : "block";
       }
 
+      if(key.code === 'Digit1'){
+          // currentWindow.maximize()
+          defaultPenColor='#FF0000';
+          document.addEventListener("mousemove", draw);
+          document.removeEventListener("mousemove", draw);
+      }
+
+      if(key.code === 'Digit2'){
+          // currentWindow.maximize()
+          defaultPenColor='#0000FF';
+          document.addEventListener("mousemove", draw);
+          document.removeEventListener("mousemove", draw);
+      }
+
+      if(key.code === 'Digit3'){
+          // currentWindow.maximize()
+          defaultPenColor='#00FF00';
+          document.addEventListener("mousemove", draw);
+          document.removeEventListener("mousemove", draw);
+      }
       if(key.code === 'KeyC'){
           ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
+
+
   }
 
   function resize() {
@@ -55,10 +103,11 @@
     document.removeEventListener("mousemove", draw);
   }
   function draw(event) {
+    console.log('color:',defaultPenColor)
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
-    ctx.strokeStyle = "#ACD3ED";
+    ctx.strokeStyle = defaultPenColor;
     ctx.moveTo(coord.x, coord.y);
     reposition(event);
     ctx.lineTo(coord.x, coord.y);
