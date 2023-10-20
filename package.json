@@ -7,10 +7,10 @@
     "start": "electron .",
     "startWithTransparentOption": "electron --enable-transparent-visuals .",
     "startWithAllOptions": "electron --enable-transparent-visuals --disable-gpu .",
-    "build": "electron-builder -mwl",
-    "build-mac": "electron-builder --mac",
-    "build-win": "electron-builder --win",
-    "build-linux": "electron-builder --linux"
+    "build": "npx electron-builder -mwl",
+    "build-mac": "npx electron-builder  --mac",
+    "build-win": "npx electron-builder --win",
+    "build-linux": "npx electron-builder --linux"
   },
   "keywords": [
     "Electron",
