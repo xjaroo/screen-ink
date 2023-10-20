@@ -36,15 +36,18 @@
   let coord = { x: 0, y: 0 };
 
   let defaultPenColor ='#FF0000';
+  function getCursorSVG(color) {
+      return `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='font-size:24px;'><text y='50%'>${color}</text></svg>") 5 25, auto`;
+  }
 
   function updateCursorStyle() {
 
-      if(defaultPenColor === '#FF0000'){
-          document.body.style.cursor = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='font-size:24px;'><text y='50%'>🔴</text></svg>") 5 25, auto`;
-       }else if (defaultPenColor === '#0000FF'){
-          document.body.style.cursor = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='font-size:24px;'><text y='50%'>🔵</text></svg>") 5 25, auto`;
-      }else if (defaultPenColor === '#00FF00'){
-          document.body.style.cursor = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='font-size:24px;'><text y='50%'>🟢</text></svg>") 5 25, auto`;
+      if (defaultPenColor === '#FF0000') {
+          document.body.style.cursor = getCursorSVG('🔴');
+      } else if (defaultPenColor === '#0000FF') {
+          document.body.style.cursor =  getCursorSVG('🔵');
+      } else if (defaultPenColor === '#00FF00') {
+          document.body.style.cursor =  getCursorSVG('🟢');
       }
 
 
